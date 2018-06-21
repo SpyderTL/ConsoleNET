@@ -45,7 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Console.System\Console.System.csproj">
+    <ProjectReference Include="..\Console.System\Console.System.csproj">
       <Project>{67166b95-0a1b-4843-91ce-101ebec2dab0}</Project>
       <Name>Console.System</Name>
     </ProjectReference>

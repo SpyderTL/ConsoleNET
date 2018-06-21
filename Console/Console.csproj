@@ -54,7 +54,7 @@
       <Project>{67166b95-0a1b-4843-91ce-101ebec2dab0}</Project>
       <Name>Console.System</Name>
     </ProjectReference>
-    <ProjectReference Include="Console.System.Nes\Console.System.Nes.csproj">
+    <ProjectReference Include="..\Console.System.Nes\Console.System.Nes.csproj">
       <Project>{77f436ae-5e91-47d4-a662-360f880c7ea7}</Project>
       <Name>Console.System.Nes</Name>
     </ProjectReference>
