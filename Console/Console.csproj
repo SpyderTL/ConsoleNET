@@ -48,15 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Metroid %28U%29 [!].nes">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Console.System\Console.System.csproj">
+    <ProjectReference Include="..\Console.System\Console.Hardware.csproj">
       <Project>{67166b95-0a1b-4843-91ce-101ebec2dab0}</Project>
-      <Name>Console.System</Name>
+      <Name>Console.Hardware</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Console.System.Nes\Console.System.Nes.csproj">
+    <ProjectReference Include="..\Console.System.Nes\Console.Hardware.Nes.csproj">
       <Project>{77f436ae-5e91-47d4-a662-360f880c7ea7}</Project>
-      <Name>Console.System.Nes</Name>
+      <Name>Console.Hardware.Nes</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

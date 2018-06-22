@@ -10,6 +10,7 @@ namespace Console.Hardware
 	{
 		public ulong Address;
 		public ulong Value;
+		public bool Write;
 		public bool Active;
 	}
 }

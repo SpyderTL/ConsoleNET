@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.System.Nes", "Console.System.Nes\Console.System.Nes.csproj", "{77F436AE-5E91-47D4-A662-360F880C7EA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.Hardware.Nes", "Console.System.Nes\Console.Hardware.Nes.csproj", "{77F436AE-5E91-47D4-A662-360F880C7EA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Console\Console.csproj", "{82462E45-910E-4570-9670-0BF2C2268685}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.System", "Console.System\Console.System.csproj", "{67166B95-0A1B-4843-91CE-101EBEC2DAB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.Hardware", "Console.System\Console.Hardware.csproj", "{67166B95-0A1B-4843-91CE-101EBEC2DAB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBCE9D56-B23F-4213-B38E-CD00A8FEB0D2}
 	EndGlobalSection
 EndGlobal
