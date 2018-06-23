@@ -10,6 +10,9 @@ namespace Console.Hardware.Nes
 	public class NesConsole : Console
 	{
 		public NesCartridge Cartridge;
+		public NesVideo Video;
+		public NesAudio Audio;
+		public NesRam Ram;
 		public Clock Clock;
 		public Mos6502 Cpu;
 		public Bus Bus;
@@ -37,6 +40,9 @@ namespace Console.Hardware.Nes
 		{
 			Bus = new Bus();
 			Clock = new Clock(179000);
+			Video = new NesVideo(Bus);
+			Audio = new NesAudio(Bus);
+			Ram = new NesRam(Bus);
 			Cpu = new Mos6502(Bus, Clock);
 
 			if (Cartridge != null)

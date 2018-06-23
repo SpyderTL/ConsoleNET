@@ -41,9 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Files\NesFile.cs" />
+    <Compile Include="NesAudio.cs" />
+    <Compile Include="NesVideo.cs" />
     <Compile Include="NesCartridge.cs" />
     <Compile Include="NesConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NesRam.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Console.System\Console.Hardware.csproj">

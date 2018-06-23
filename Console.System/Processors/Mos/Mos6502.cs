@@ -90,9 +90,31 @@ namespace Console.Hardware.Processors.Mos
 					Program += 2;
 					break;
 
+				case 0x0a:
+					// Shift Accumulator Left
+					A <<= 1;
+
+					Program += 1;
+					break;
+
+				case 0x4a:
+					// Shift Accumulator Right
+					A >>= 1;
+
+					Program += 1;
+					break;
+
 				case 0x10:
 					// Branch To Relative8 If Positive
-					if ((Flags & 0x80) != 0)
+					if ((Flags & 0x80) == 0)
+						Program = (ushort)(Program + (int)Read(Program + 1UL));
+					else
+						Program += 2;
+					break;
+
+				case 0xf0:
+					// Branch To Relative8 If Equal
+					if ((Flags & 0x02) != 0)
 						Program = (ushort)(Program + (int)Read(Program + 1UL));
 					else
 						Program += 2;
@@ -125,6 +147,16 @@ namespace Console.Hardware.Processors.Mos
 					Program++;
 					break;
 
+				case 0x60:
+					// Return From Subroutine
+					address = (ushort)Read((ulong)Stack + 0x100);
+					address |= (ushort)(Read((ulong)Stack + 0x101) << 8);
+
+					Stack += 2;
+
+					Program = address;
+					break;
+
 				case 0x6e:
 					// Roll Immediate16 Address Right
 					address = (ushort)Read(Program + 1UL);
@@ -143,6 +175,15 @@ namespace Console.Hardware.Processors.Mos
 					Program++;
 					break;
 
+				case 0x85:
+					// Copy Accumulator To Immediate8 Address
+					address = (ushort)Read(Program + 1UL);
+
+					Write(address, A);
+
+					Program += 2;
+					break;
+
 				case 0x8d:
 					// Copy Accumulator To Immediate16 Address
 					address = (ushort)Read(Program + 1UL);
@@ -154,12 +195,6 @@ namespace Console.Hardware.Processors.Mos
 					break;
 
 				case 0x8e:
-					// Copy Immediate8 To XIndex
-					X = (byte)Read(Program + 1UL);
-					Program += 2;
-					break;
-
-				case 0xa2:
 					// Copy XIndex To Immediate16 Address
 					address = (ushort)Read(Program + 1UL);
 					address |= (ushort)(Read(Program + 2UL) << 8);
@@ -167,6 +202,19 @@ namespace Console.Hardware.Processors.Mos
 					Write(address, X);
 
 					Program += 3;
+					break;
+
+				case 0xa2:
+					// Copy Immediate8 To XIndex
+					X = (byte)Read(Program + 1UL);
+					Program += 2;
+					break;
+
+				case 0xa6:
+					// Copy Immediate8 Address To XIndex
+					address = (byte)Read(Program + 1UL);
+					X = (byte)Read(address);
+					Program += 2;
 					break;
 
 				case 0xa9:
@@ -188,6 +236,58 @@ namespace Console.Hardware.Processors.Mos
 					address |= (ushort)(Read(Program + 2UL) << 8);
 
 					A = (byte)Read(address);
+
+					Program += 3;
+					break;
+
+				case 0x90:
+					// Branch To Relative8 If Not Carry
+					address = (ushort)Read(Program + 1UL);
+
+					if ((Flags & 0x01) == 0)
+						Program = (ushort)(Program + address + 2);
+					else
+						Program += 2;
+
+					break;
+
+				case 0xb0:
+					// Branch To Relative8 If Carry
+					address = (ushort)Read(Program + 1UL);
+
+					if ((Flags & 0x01) != 0)
+						Program = (ushort)(Program + address + 2);
+					else
+						Program += 2;
+
+					break;
+
+				case 0xb9:
+					// Copy Immediate16 Plus YIndex Address To Accumulator
+					address = (ushort)Read(Program + 1UL);
+					address |= (ushort)(Read(Program + 2UL) << 8);
+
+					A = (byte)Read((ulong)address + Y);
+
+					Program += 3;
+					break;
+
+				case 0xbc:
+					// Copy Immediate16 Plus XIndex Address To YIndex
+					address = (ushort)Read(Program + 1UL);
+					address |= (ushort)(Read(Program + 2UL) << 8);
+
+					Y = (byte)Read((ulong)address + X);
+
+					Program += 3;
+					break;
+
+				case 0xbd:
+					// Copy Immediate16 Plus XIndex Address To Accumulator
+					address = (ushort)Read(Program + 1UL);
+					address |= (ushort)(Read(Program + 2UL) << 8);
+
+					A = (byte)Read((ulong)address + X);
 
 					Program += 3;
 					break;
@@ -215,6 +315,17 @@ namespace Console.Hardware.Processors.Mos
 					// Clear Decimal Flag
 					Flags &= 0xf7;
 					Program++;
+					break;
+
+				case 0xf6:
+					// Increment Immediate8 Plus XIndex Address
+					address = (ushort)Read(Program + 1UL);
+
+					value = (Byte)Read((ulong)address + X);
+
+					Write((ushort)(address + X), (byte)(value + 1));
+
+					Program += 2;
 					break;
 
 				default:

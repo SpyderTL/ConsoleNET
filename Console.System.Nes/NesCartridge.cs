@@ -27,7 +27,8 @@ namespace Console.Hardware.Nes
 
 			while (true)
 			{
-				while (!Bus.Active)
+				while (!Bus.Active ||
+					Bus.Address < 0x4020)
 					Thread.Sleep(10);
 
 				Bus.Value = Rom[Bus.Address];
